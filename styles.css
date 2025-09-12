@@ -1,0 +1,10 @@
+:root { font-family: system-ui, Arial; background:#f7fafc; color:#111; }
+.app { max-width:600px; margin:40px auto; padding:20px; background:white; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+h1{font-size:1.6rem;margin:0 0 12px}
+form{display:flex;gap:8px;margin-bottom:12px}
+input{flex:1;padding:10px;border:1px solid #ddd;border-radius:6px}
+button{padding:10px 14px;border-radius:6px;border:none;background:#2563eb;color:white;cursor:pointer}
+ul{list-style:none;padding:0;margin:0}
+li{display:flex;justify-content:space-between;padding:8px 6px;border-bottom:1px solid #f0f0f0}
+.done{text-decoration:line-through;color:#9ca3af}
+.actions button{margin-left:6px}
