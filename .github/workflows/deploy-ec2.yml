@@ -17,16 +17,16 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-south-1   # <-- replace with your region
+        aws-region: ap-south-1   # your AWS region
 
     - name: Configure SSH key
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+        echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/scale.pem
+        chmod 600 ~/.ssh/scale.pem
 
     - name: Deploy app to EC2
       run: |
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_PUBLIC_IP }} "mkdir -p ~/app"
-        scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r ./backend/* ubuntu@${{ secrets.EC2_PUBLIC_IP }}:~/app/
-        ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@${{ secrets.EC2_PUBLIC_IP }} "cd ~/app && npm install && pm2 restart all || pm2 start server.js"
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/scale.pem ubuntu@${{ secrets.EC2_PUBLIC_IP }} "mkdir -p ~/app"
+        scp -o StrictHostKeyChecking=no -i ~/.ssh/scale.pem -r ./backend/* ubuntu@${{ secrets.EC2_PUBLIC_IP }}:~/app/
+        ssh -o StrictHostKeyChecking=no -i ~/.ssh/scale.pem ubuntu@${{ secrets.EC2_PUBLIC_IP }} "cd ~/app && npm install && pm2 restart all || pm2 start server.js"
