@@ -1,10 +1,10 @@
-resource "aws_key_pair" "deployer" {
-  key_name   = "deployer-key"
+resource "aws_key_pair" "backend-project" {
+  key_name   = "backend-project"
   public_key = file("C:/Users/Vignesh M/.ssh/id_rsa.pub") # Windows path
 }
 
-resource "aws_security_group" "backend_sg" {
-  name = "backend-sg"
+resource "aws_security_group" "backend_sgg" {
+  name = "backend-sgg"
 
   ingress {
     description = "SSH"
@@ -43,7 +43,7 @@ resource "aws_instance" "backend" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.deployer.key_name
-  vpc_security_group_ids = [aws_security_group.backend_sg.id]
+  vpc_security_group_ids = [aws_security_group.backend_sgg.id]
 
   user_data = <<-EOF
               #!/bin/bash
