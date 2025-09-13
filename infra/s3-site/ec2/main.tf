@@ -62,7 +62,7 @@ resource "aws_instance" "backend" {
               chown ubuntu:ubuntu /home/ubuntu/app
 
               # Simple test app
-              echo "console.log('✅ EC2 Backend running!')" > /home/ubuntu/app/index.js
+              echo "console.log('EC2 Backend running!')" > /home/ubuntu/app/index.js
               pm2 start /home/ubuntu/app/index.js --name backend-app
               pm2 startup systemd
               pm2 save
